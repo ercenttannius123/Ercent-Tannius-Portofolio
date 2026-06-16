@@ -4,10 +4,31 @@ import cors from 'cors'
 import nodemailer from 'nodemailer'
 
 const app = express()
-app.use(express.json())
 
-// CORS: allow frontend origin via env CORS_ORIGIN (default allow all)
-app.use(cors({ origin: process.env.CORS_ORIGIN || '*' }))
+const normalizeOrigin = (origin) => origin && origin.replace(/\/+$/, '')
+const configuredOrigin = normalizeOrigin(process.env.CORS_ORIGIN) || 'https://ercent-tannius-portofolio.vercel.app'
+const allowedOrigins = [
+  configuredOrigin,
+  'https://ercent-tannius-portofolio.vercel.app',
+  'http://localhost:5173',
+  'http://127.0.0.1:5173',
+  'http://localhost:3000',
+].filter(Boolean).map(normalizeOrigin)
+
+const corsOptions = {
+  origin: (origin, callback) => {
+    if (!origin) return callback(null, true)
+    if (allowedOrigins.includes(normalizeOrigin(origin))) return callback(null, true)
+    console.warn('Blocked CORS origin:', origin)
+    callback(new Error('Not allowed by CORS'))
+  },
+  credentials: true,
+  optionsSuccessStatus: 200,
+}
+
+app.use(cors(corsOptions))
+app.options('*', cors(corsOptions))
+app.use(express.json())
 
 const SMTP_HOST = process.env.SMTP_HOST
 const SMTP_PORT = Number(process.env.SMTP_PORT || 587)
