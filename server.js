@@ -25,6 +25,11 @@ const transporter = nodemailer.createTransport({
   },
 })
 
+// Verify SMTP connection at startup so logs show auth/connect errors early
+transporter.verify()
+  .then(() => console.log('SMTP transporter ready'))
+  .catch((err) => console.error('SMTP verify failed:', err && err.message ? err.message : err))
+
 app.post('/api/contact', async (req, res) => {
   const { name = '', email = '', message = '' } = req.body
 
@@ -47,9 +52,17 @@ app.post('/api/contact', async (req, res) => {
     await transporter.sendMail(mailOptions)
     return res.status(200).json({ message: 'Pesan dikirim.' })
   } catch (error) {
-    console.error('Email error:', error)
+    // Log detailed error for debugging (Railway logs)
+    console.error('Email error:', error && error.message ? error.message : error)
+    if (error && error.response) console.error('SMTP response:', error.response)
+    if (error && error.stack) console.error(error.stack)
     return res.status(500).json({ error: 'Gagal mengirim email.' })
   }
+})
+
+// simple root route for quick deployment/health check
+app.get('/', (req, res) => {
+  res.send('Backend OK')
 })
 
 const PORT = process.env.PORT || 3000
