@@ -1,9 +1,13 @@
 import 'dotenv/config'
 import express from 'express'
+import cors from 'cors'
 import nodemailer from 'nodemailer'
 
 const app = express()
 app.use(express.json())
+
+// CORS: allow frontend origin via env CORS_ORIGIN (default allow all)
+app.use(cors({ origin: process.env.CORS_ORIGIN || '*' }))
 
 const SMTP_HOST = process.env.SMTP_HOST
 const SMTP_PORT = Number(process.env.SMTP_PORT || 587)
