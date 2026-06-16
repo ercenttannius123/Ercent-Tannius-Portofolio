@@ -4,6 +4,7 @@ import './Contact.css'
 function Contact() {
   const [status, setStatus] = useState('')
   const [submitting, setSubmitting] = useState(false)
+  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000'
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -16,7 +17,7 @@ function Contact() {
     const message = form.message.value || ''
 
     try {
-      const response = await fetch('/api/contact', {
+      const response = await fetch(`${API_URL}/api/contact`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, email, message }),
