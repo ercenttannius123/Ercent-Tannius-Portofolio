@@ -4,7 +4,11 @@ import './Contact.css'
 function Contact() {
   const [status, setStatus] = useState('')
   const [submitting, setSubmitting] = useState(false)
-  const API_URL = import.meta.env.VITE_API_URL || (window.location.hostname === 'localhost' ? 'http://localhost:3000' : 'https://alluring-creativity-production.up.railway.app')
+  const rawApiUrl = (import.meta.env.VITE_API_URL || '').trim()
+  const API_URL = rawApiUrl.replace(/\/+$/, '') ||
+    (window.location.hostname === 'localhost'
+      ? 'http://localhost:3000'
+      : 'https://alluring-creativity-production.up.railway.app')
 
   const handleSubmit = async (e) => {
     e.preventDefault()
