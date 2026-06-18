@@ -173,4 +173,10 @@
   }
 }
 
-
+@media (max-width: 768px) {
+  #skills .section-label,
+  #skills .section-title {
+    max-width: calc(100% - 40px);
+    margin: 0 auto;
+  }
+}
