@@ -10,8 +10,17 @@ import initScrollReveal from './scrollReveal'
 import './App.css'
 
 function App() {
+
   useEffect(() => {
     initScrollReveal()
+    window.scrollTo(0, 0)
+    if (window.location.hash) {
+      window.history.replaceState(null, "", window.location.pathname)
+    }
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual'
+    }
+
   }, [])
 
   return (
