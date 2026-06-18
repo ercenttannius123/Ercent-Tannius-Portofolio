@@ -72,7 +72,7 @@ const projects = [
 
 function Projects() {
   const [selectedProject, setSelectedProject] = useState(null)
-  const [currentIndex, setCurrentIndex] = useState(0)
+  const [currentIndex, setCurrentIndex] = useState(1)
   const gridRef = useRef(null)
   const [showPrev, setShowPrev] = useState(false)
   const [showNext, setShowNext] = useState(true)
