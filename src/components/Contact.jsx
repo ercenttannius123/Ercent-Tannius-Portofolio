@@ -4,11 +4,8 @@ import './Contact.css'
 function Contact() {
   const [status, setStatus] = useState('')
   const [submitting, setSubmitting] = useState(false)
-  const rawApiUrl = (import.meta.env.VITE_API_URL || '').trim()
-  const API_URL = rawApiUrl.replace(/\/+$/, '') ||
-    (window.location.hostname === 'localhost'
-      ? 'http://localhost:3000'
-      : 'https://alluring-creativity-production.up.railway.app')
+
+  const API_URL = "https://script.google.com/macros/s/AKfycbzm9DTT7_cmrj3sYKuuro_PBiOK-C6lpOCqJo-0dH86bccBaFE4C8h3oQycO4K2q8iaGA/exec"
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -21,85 +18,85 @@ function Contact() {
     const message = form.message.value || ''
 
     try {
-      const response = await fetch(`${API_URL}/api/contact`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, message }),
-      })
+  const formData = new URLSearchParams()
+  formData.append('name', name)
+  formData.append('email', email)
+  formData.append('message', message)
 
-      if (!response.ok) {
-        throw new Error('Gagal mengirim pesan')
-      }
+  const response = await fetch(API_URL, {
+    method: 'POST',
+    body: formData
+  })
 
-      setStatus('Pesan berhasil dikirim. Terima kasih!')
-      form.reset()
-    } catch (error) {
-      setStatus('Terjadi kesalahan. Silakan coba lagi nanti.')
-      console.error(error)
-    } finally {
-      setSubmitting(false)
-    }
+  const result = await response.text()
+
+  if (!response.ok) {
+    throw new Error(result || 'Gagal mengirim pesan')
   }
 
+  setStatus('Pesan berhasil dikirim. Terima kasih!')
+  form.reset()
+} catch (error) {
+  console.error(error)
+  setStatus('Terjadi kesalahan. Silakan coba lagi nanti.')
+} finally {
+  setSubmitting(false)
+}
+
+  }
   return (
     <section className="section" id="contact">
       <div className="contact-inner">
         <div className="contact-two-column">
+
           <div className="contact-header">
             <div className="section-label">Contact</div>
             <div className="section-title">Hubungi Saya</div>
           </div>
+
           <div className="contact-form-card reveal-item" style={{ transitionDelay: '60ms' }}>
-          <h4 className="contact-title">
-            <span className="contact-icon">📝</span>
-            Kirim Pesan
-          </h4>
-          <form className="contact-form" onSubmit={handleSubmit}>
-            <input type="text" name="name" placeholder="Nama" />
-            <input type="email" name="email" placeholder="Email" />
-            <textarea name="message" placeholder="Pesan" rows="4"></textarea>
-            <button type="submit" disabled={submitting}>
-              {submitting ? 'Mengirim...' : 'Kirim Pesan'}
-            </button>
-            {status && <div className="contact-status">{status}</div>}
-          </form>
-        </div>
-
-        <div className="contact-info-column reveal-item" style={{ transitionDelay: '120ms' }}>
-          <div className="contact-card">
             <h4 className="contact-title">
-              <span className="contact-icon">🐱</span>
-              GitHub
+              <span className="contact-icon">📝</span>
+              Kirim Pesan
             </h4>
-            <a href="https://github.com/ercenttannius123" target="_blank" rel="noreferrer">github.com/ercenttannius123</a>
-          </div>
 
-          <div className="contact-card">
-            <h4 className="contact-title">
-              <span className="contact-icon">✉️</span>
-              Email
-            </h4>
-            <div className="contact-email-row">
-              <a href="mailto:ercent.tannius@binus.ac.id">ercent.tannius@binus.ac.id</a>
-              <button type="button" className="copy-btn" onClick={() => navigator.clipboard.writeText('ercent.tannius@binus.ac.id')} title="Salin alamat email">
-                <span className="copy-icon">📋</span>
-                <span>Salin</span>
+            <form className="contact-form" onSubmit={handleSubmit}>
+              <input type="text" name="name" placeholder="Nama" required />
+              <input type="email" name="email" placeholder="Email" required />
+              <textarea name="message" placeholder="Pesan" rows="4" required />
+
+              <button type="submit" disabled={submitting}>
+                {submitting ? 'Mengirim...' : 'Kirim Pesan'}
               </button>
-            </div>
-            <div className="contact-email-links">
-              <a href={`https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent('ercent.tannius@binus.ac.id')}`} target="_blank" rel="noreferrer" title="Buka di Gmail">Gmail</a>
-              <a href={`https://outlook.office.com/mail/deeplink/compose?to=${encodeURIComponent('ercent.tannius@binus.ac.id')}`} target="_blank" rel="noreferrer" title="Buka di Outlook">Outlook</a>
-            </div>
+
+              {status && <div className="contact-status">{status}</div>}
+            </form>
           </div>
 
-          <div className="contact-card">
-            <h4 className="contact-title">
-              <span className="contact-icon">🔗</span>
-              LinkedIn
-            </h4>
-            <a href="https://www.linkedin.com/in/ercent-tannius-654751326/" target="_blank" rel="noreferrer">linkedin.com/in/ercent-tannius-654751326/</a>
+          <div className="contact-info-column reveal-item" style={{ transitionDelay: '120ms' }}>
+            
+            <div className="contact-card">
+              <h4 className="contact-title">🐱 GitHub</h4>
+              <a href="https://github.com/ercenttannius123" target="_blank" rel="noreferrer">
+                github.com/ercenttannius123
+              </a>
+            </div>
+
+            <div className="contact-card">
+              <h4 className="contact-title">✉️ Email</h4>
+              <a href="mailto:ercent.tannius@binus.ac.id">
+                ercent.tannius@binus.ac.id
+              </a>
+            </div>
+
+            <div className="contact-card">
+              <h4 className="contact-title">🔗 LinkedIn</h4>
+              <a href="https://www.linkedin.com/in/ercent-tannius-654751326/" target="_blank" rel="noreferrer">
+                linkedin.com/in/ercent-tannius
+              </a>
+            </div>
+
           </div>
-        </div>
         </div>
       </div>
     </section>
@@ -107,3 +104,4 @@ function Contact() {
 }
 
 export default Contact
+
