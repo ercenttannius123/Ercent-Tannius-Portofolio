@@ -45,7 +45,7 @@
   overflow: hidden;
   transition: transform 0.25s ease, background 0.25s ease;
   min-height: 260px;
-  min-width: 360px;
+  min-width: 320px;
   width: 100%;
   cursor: pointer;
   border: none;
@@ -55,24 +55,24 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08), inset 0 0 0 0 rgba(83, 74, 183, 0);
 }
 
-/* Carousel container and controls */
 .projects-carousel {
   position: relative;
   max-width: 1100px;
   margin: 18px auto 0;
+  overflow: hidden;
+  pointer-events: auto;
 }
-/* ensure buttons are clickable above the scroll area */
-.projects-carousel { overflow: visible; pointer-events: auto; }
 .projects-grid { z-index: 1; pointer-events: auto; }
 
 .projects-grid {
   display: flex;
   gap: 20px;
   overflow-x: auto;
-  padding: 20px 60px;
+  padding: 20px 10px;
   scroll-snap-type: x mandatory;
-  scroll-padding: 0 50%;
   -webkit-overflow-scrolling: touch;
+  z-index: 1;
+  pointer-events: auto;
 }
 
 .carousel-button {
@@ -128,7 +128,9 @@
   box-shadow: 0 4px 12px rgba(43, 58, 103, 0.12);
 }
 
-.project-card { scroll-snap-align: center; }
+.project-card {
+  scroll-snap-align: start;
+}
 
 .project-card:hover {
   animation: card-bounce 0.5s ease-in-out;
@@ -417,3 +419,4 @@
   background: rgba(83, 74, 183, 0.12);
   color: #3c3489;
 }
+
