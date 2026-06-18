@@ -50,3 +50,20 @@
   border-radius: 50%;
   flex-shrink: 0;
 }
+
+#skills {
+  position: relative;
+  padding-top: 24px;
+  padding-bottom: 40px;
+}
+
+#skills::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 100vw;
+  transform: translateX(-50%);
+  height: 1px;
+  background: rgba(74, 84, 212, 0.25);
+}
