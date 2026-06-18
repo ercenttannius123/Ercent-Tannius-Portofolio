@@ -1,7 +1,15 @@
+import { useState } from 'react'
 import './Hero.css'
 import ercentPhoto from '../../Ercent.jpeg'
 
 function Hero() {
+  const [showToast, setShowToast] = useState(false)
+  const handleDownload = () => {
+    setShowToast(true)
+    setTimeout(() => {
+      setShowToast(false)
+    }, 3000)
+  }
   return (
     <section className="hero" id="about">
       <div className="hero-gradient" />
@@ -33,10 +41,22 @@ function Hero() {
 
           <div className="hero-btns">
             <a href="#projects" className="btn-primary">Lihat Proyek</a>
-            <a href="/cv-ercent-tannius.pdf" className="btn-outline" download>Unduh CV</a>
+            <a
+href="/cv-ercent-tannius.pdf"
+  className="btn-outline"
+  download
+  onClick={handleDownload}
+>
+  Unduh CV
+</a>
           </div>
         </div>
       </div>
+      {showToast && (
+  <div className="download-toast">
+    📄 CV download started
+  </div>
+)}
     </section>
   )
 }
