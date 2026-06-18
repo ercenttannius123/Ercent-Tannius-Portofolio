@@ -242,3 +242,21 @@
   }
 }
 
+.download-toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+
+  background: #10b981;
+  color: white;
+
+  padding: 12px 18px;
+  border-radius: 12px;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  box-shadow: 0 10px 30px rgba(0,0,0,.15);
+
+  z-index: 9999;
+}
