@@ -28,6 +28,7 @@ function Hero() {
             <div className="hero-chip">5+ Projects completed</div>
             <div className="hero-chip">Machine Learning</div>
             <div className="hero-chip">UI / UX Design</div>
+            <div className="hero-chip">Research Published</div>
           </div>
 
           <div className="hero-btns">
