@@ -42,7 +42,7 @@ function Footer() {
           <div className="footer-section">
             <h4 className="footer-subtitle">Resources</h4>
             <ul className="footer-links">
-              <li><a href="/cv.pdf" download>Download CV</a></li>
+              <li><a href="/cv-ercent-tannius.pdf" download>Download CV</a></li>
               <li><a href="#projects">View Projects</a></li>
               <li><a href="#contact">Hubungi Saya</a></li>
             </ul>
