@@ -32,7 +32,7 @@ function Hero() {
 
           <div className="hero-btns">
             <a href="#projects" className="btn-primary">Lihat Proyek</a>
-            <a href="/cv.pdf" className="btn-outline" download>Unduh CV</a>
+            <a href="/Ercent Tannius_CV.pdf" className="btn-outline" download>Unduh CV</a>
           </div>
         </div>
       </div>
