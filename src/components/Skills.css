@@ -26,6 +26,8 @@
   gap: 24px;
   max-width: 900px;
   margin: 32px auto 0;
+  padding: 0 20px;
+  box-sizing: border-box;
 }
 
 .skill-card {
@@ -162,6 +164,7 @@
 @media (max-width: 768px) {
   .skills-container {
     grid-template-columns: 1fr;
+    padding: 0 16px;
   }
 
   .skill-card-large {
@@ -170,6 +173,12 @@
 
   .skill-card {
     padding: 18px;
+  }
+
+  #skills .section-label,
+  #skills .section-title {
+    padding: 0 16px;
+    box-sizing: border-box;
   }
 }
 
